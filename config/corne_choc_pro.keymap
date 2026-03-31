@@ -25,6 +25,9 @@
             flavor = "balanced";
             hold-trigger-on-release;
             quick-tap-ms = <125>;
+            require-prior-idle-ms = <50>;
+            hold-while-undecided-linger;
+            hold-while-undecided;
         };
     };
 
