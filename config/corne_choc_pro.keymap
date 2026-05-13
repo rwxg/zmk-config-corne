@@ -15,9 +15,9 @@
 
 / {
     behaviors {
-        safe_mod_tap: safe_mod_tap {
+        mod_tap: mod_tap {
             compatible = "zmk,behavior-hold-tap";
-            label = "SAFE_MOD_TAP";
+            label = "MOD_TAP";
             #binding-cells = <2>;
             bindings = <&kp>, <&kp>;
 
@@ -25,7 +25,6 @@
             flavor = "balanced";
             quick-tap-ms = <80>;
             hold-while-undecided;
-            retro-tap;
         };
     };
 
@@ -46,7 +45,7 @@
     keymap {
         compatible = "zmk,keymap";
 
-        default_layer {
+        primary {
             display-name = "QWERTY";
 
             // --------------------------------------------------------------------------------
@@ -56,10 +55,10 @@
             //                    | GUI | LWR | SPC |               | ENT | RSE  | ALT |
 
             bindings = <
-&kp ESCAPE               &kp Q  &kp W  &kp E         &kp R  &kp T      &kp C_MUTE    &kp C_PP       &kp Y          &kp U  &kp I      &kp O    &kp P     &kp BSPC
-&safe_mod_tap LSHFT TAB  &kp A  &kp S  &kp D         &kp F  &kp G      &kp LEFT_GUI  &kp RIGHT_GUI  &kp H          &kp J  &kp K      &kp L    &kp SEMI  &safe_mod_tap RSHFT APOS
-&kp LCTRL                &kp Z  &kp X  &kp C         &kp V  &kp B                                   &kp N          &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp RCTRL
-                                       &kp LEFT_ALT  &mo 1  &kp SPACE                               &kp RIGHT_GUI  &mo 1  &kp RALT
+&kp ESCAPE  &kp Q  &kp W  &kp E         &kp R  &kp T      &kp C_MUTE    &kp C_PP       &kp Y                   &kp U  &kp I      &kp O    &kp P     &kp BSPC
+&kp LSHFT   &kp A  &kp S  &kp D         &kp F  &kp G      &kp LEFT_GUI  &kp RIGHT_GUI  &kp H                   &kp J  &kp K      &kp L    &kp SEMI  &mod_tap RSHFT APOS
+&kp LCTRL   &kp Z  &kp X  &kp C         &kp V  &kp B                                   &kp N                   &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp RCTRL
+                          &kp LEFT_ALT  &mo 1  &kp SPACE                               &mod_tap RIGHT_GUI TAB  &mo 1  &kp RALT
             >;
 
             sensor-bindings =
@@ -69,7 +68,7 @@
         };
 
         lower_layer {
-            display-name = "NUMBER";
+            display-name = "NUMBER&SYMBOL";
 
             // -----------------------------------------------------------------------------------------
             // |  TAB |  1  |  2  |  3  |  4  |  5    |  LCTRL | RCTRL |  6  |  7  |  8  |  9  |  0  | BSPC |
@@ -78,8 +77,8 @@
             //                    | GUI |     | SPC   |        | ENT   |     | ALT |
 
             bindings = <
-&kp DELETE  &kp N1         &kp N2     &kp N3     &kp N4     &kp N5            &trans          &trans           &kp N6             &kp N7    &kp N8  &kp N9     &kp N0  &kp BSPC
-&trans      &kp BACKSLASH  &kp GRAVE  &kp MINUS  &kp EQUAL  &trans            &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp LEFT           &kp DOWN  &kp UP  &kp RIGHT  &trans  &kp ENTER
+&kp DELETE  &kp N1         &kp N2     &kp N3     &kp N4     &kp N5            &trans          &trans           &kp N6             &kp N7    &kp N8  &kp N9     &kp N0  &trans
+&trans      &kp BACKSLASH  &kp GRAVE  &kp MINUS  &kp EQUAL  &trans            &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp LEFT           &kp DOWN  &kp UP  &kp RIGHT  &trans  &mod_tap RIGHT_SHIFT ENTER
 &trans      &kp PIPE       &kp TILDE  &kp UNDER  &kp PLUS   &kp LEFT_BRACKET                                   &kp RIGHT_BRACKET  &trans    &trans  &trans     &trans  &trans
                                       &trans     &mo 2      &trans                                             &trans             &mo 2     &trans
             >;
@@ -91,7 +90,7 @@
         };
 
         system {
-            display-name = "EXTRA 1";
+            display-name = "SYS";
             bindings = <
 &trans          &trans        &trans        &trans        &trans        &trans        &trans      &trans           &trans           &rgb_ug RGB_EFF  &rgb_ug RGB_EFR  &trans           &trans  &trans
 &studio_unlock  &trans        &trans        &trans        &trans        &trans        &bt BT_CLR  &rgb_ug RGB_TOG  &rgb_ug RGB_HUD  &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &rgb_ug RGB_HUI  &trans  &studio_unlock
